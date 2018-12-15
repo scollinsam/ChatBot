@@ -147,19 +147,6 @@ def language_check(string):
     return boto_response
 
 
-# def print_some_times():
-#     print('running')
-#     s.enter(5, 1, reminder, ())
-#     s.run()
-#
-# @route("/chat", method='POST')
-# def reminder():
-#     print("go")
-#     return json.dumps({"animation": "bored", "msg": "C'mon, I'm getting bored. Say something!"})
-
-# print_some_times()
-
-
 @route('https://geek-jokes.sameerkumar.website/api', method='GET')
 def joke_generator():
     random_joke = requests.get('https://geek-jokes.sameerkumar.website/api')
