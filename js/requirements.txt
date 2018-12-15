@@ -1,0 +1,5 @@
+#chat related
+textblob == 0.15.0
+
+#for content from API
+requests == 2.21.0
