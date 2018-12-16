@@ -48,7 +48,6 @@ def chat():
     question_words = ("can", "aliyah", "army")
     user_message = request.POST.get('msg')
     b = TextBlob(user_message)
-    print(b.sentiment)
     boto_response =str(b)
     translated_response = language_check(boto_response)
     translated_response_array = translated_response.split(" ")
@@ -72,7 +71,6 @@ def chat():
         boto_response = user_message[:input_index] + " is a Billy Bollins"
         boto_animation = "giggling"
     if "I am" in translated_response and translated_blob.polarity <= -.5:
-        print("in")
         boto_response = "If you or a friend is considering taking their own life. Please call the Israel suicide hotline at 972-9-8891333"
         boto_animation = "afraid"
     elif translated_blob.polarity <= -.5:
@@ -99,7 +97,6 @@ def chat():
         boto_response = "A " + word + " is " + str(definition[0])
         boto_animation = "dancing"
     elif "what" and "mean" in translated_blob:
-        print(translated_blob[-1])
         word = translated_blob_array[-2]
         definition = word.definitions
         boto_response = word.capitalize() + " has a few meanings, for example: " + str(definition[0]) + "," + str(definition[1]) + ". I hope that helps!"
@@ -120,7 +117,6 @@ def chat():
 
 
 def question_response(item):
-    print (item)
     if item == "army":
         boto_response = "Of course. I was a fighter pilot for 15 years!"
         boto_animation = "takeoff"
@@ -130,8 +126,6 @@ def question_response(item):
     if item == "aliyah":
         boto_response = "Not yet. They told me they would schedule my interview soon!"
         boto_animation = "waiting"
-    print(boto_response)
-    print(boto_animation)
     return boto_response, boto_animation
 
 
@@ -148,7 +142,6 @@ def language_check(string):
 @route('https://geek-jokes.sameerkumar.website/api', method='GET')
 def joke_generator():
     random_joke = requests.get('https://geek-jokes.sameerkumar.website/api')
-    print(random_joke.text)
     return random_joke.text
 
 @route("/test", method='POST')
