@@ -59,9 +59,7 @@ def chat():
     boto_animation = "confused"
     if "You" in translated_blob or "you" in translated_blob:
         if any((word in question_words for word in translated_blob_array)):
-            print(translated_blob_array)
             for item in translated_response_array:
-                print(item)
                 if item in question_words:
                     responses = question_response(item)
                     boto_response = responses[0]
@@ -73,9 +71,16 @@ def chat():
         input_index = user_message.index("Jacob Collins") + len("Jacob Collins")
         boto_response = user_message[:input_index] + " is a Billy Bollins"
         boto_animation = "giggling"
-    elif "I am" in translated_response and translated_blob.polarity <= -.5:
+    if "I am" in translated_response and translated_blob.polarity <= -.5:
+        print("in")
         boto_response = "If you or a friend is considering taking their own life. Please call the Israel suicide hotline at 972-9-8891333"
         boto_animation = "afraid"
+    elif translated_blob.polarity <= -.5:
+        boto_response = "I'm sorry to hear that:("
+        boto_animation = "crying"
+    elif translated_blob.polarity >= .5:
+        boto_response = "That's great!"
+        boto_animation = "excited"
     elif "I am" in translated_response or "i am" in translated_response:
         name_index = translated_response_array.index("am") + 1
         boto_response = "Hello " + translated_response_array[name_index]
@@ -85,16 +90,9 @@ def chat():
         boto_response = "Hello " + translated_response_array[name_index]
         boto_animation = "excited"
     for item in translated_response_array:
-        print(item)
         if item in swear_words:
             boto_response = "Why don't we talk again when you have something nice to say"
             boto_animation = "no"
-    if translated_blob.polarity <= -.5:
-        boto_response = "I'm sorry to hear that:("
-        boto_animation = "crying"
-    elif translated_blob.polarity >= .5:
-        boto_response = "That's great!"
-        boto_animation = "excited"
     if "what" and "is" in translated_blob:
         word = translated_blob_array[-1]
         definition = word.definitions
